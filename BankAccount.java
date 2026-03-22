@@ -14,7 +14,7 @@ public class BankAccount {
     }
     
     //Withdrow method
-    public void withdrow(double ammount){
+    public void withdraw(double ammount){
         if(balance < ammount){       
             System.out.println(" Not Enought Balance");    //balance less than ammount 
         } else {
