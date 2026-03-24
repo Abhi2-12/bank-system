@@ -1,5 +1,7 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.File;
+import java.io.PrintWriter;
 
 
 public class Main {
@@ -8,13 +10,26 @@ public class Main {
      
         //For input 
         Scanner input = new Scanner(System.in);
-        boolean account = true;
-
 
         //Bank account Object
         //BankAccount account = new BankAccount(0); //(This is for single account)
         ArrayList<BankAccount> accounts = new ArrayList<>();
+        File file = new File("accounts.txt");
 
+        try {
+            Scanner fileReader = new Scanner(file);
+
+            while (fileReader.hasNextLine()) {
+                double balance = Double.parseDouble(fileReader.nextLine());
+                accounts.add(new BankAccount(balance));   
+            }
+            fileReader.close();
+
+        } catch (Exception e) {
+            System.out.println("No previous data found");
+        }
+
+        boolean account = true;
         while (account) {
 
         System.out.println("1. Create account ");
@@ -166,6 +181,18 @@ public class Main {
         }
             
             
+        }
+
+        try {
+            PrintWriter writer = new PrintWriter(file);
+
+            for (BankAccount acc : accounts){
+                writer.println(acc.getBalance());
+            }
+            writer.close();
+            System.out.println("Data saved...");
+        } catch (Exception e) {
+            System.out.println("Error Saving data.");
         }
 
         
