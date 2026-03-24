@@ -14,19 +14,39 @@ public class Main {
         //Bank account Object
         //BankAccount account = new BankAccount(0); //(This is for single account)
         ArrayList<BankAccount> accounts = new ArrayList<>();
-        
+
         while (account) {
 
         System.out.println("1. Create account ");
         System.out.println("2. Select Account");
         System.out.println("3. Exit ");
 
-        int choice = input.nextInt();
+        //int choice = input.nextInt();  replace it with try_catch
+
+        int choice;
+
+        try {
+            choice = input.nextInt();
+        } catch (Exception e) {
+            System.out.println("Invalid input ! Enter a number . ");
+            input.nextLine();  //clear bad input
+            continue; //restat loop
+        }
+
 
         switch (choice) {
             case 1:
                 System.out.println("Enter initial balane: ");
-                double initial = input.nextDouble();
+                //double initial = input.nextDouble();
+                double initial;
+                try {
+                    initial = input.nextDouble();
+                    
+                } catch (Exception e) {
+                    System.out.println(" invalid input");
+                    input.nextLine();
+                    continue;
+                }
 
                 BankAccount newAccount = new BankAccount(initial);
                 accounts.add(newAccount);
@@ -35,7 +55,17 @@ public class Main {
 
             case 2:
                 System.out.println(" Enter Account ID : ");
-                int id = input.nextInt();
+                //int id = input.nextInt();
+                int id;
+                
+                try {
+                    id = input.nextInt();
+                } catch (Exception e) {
+                    System.out.println("Invalid input ...plz input number");
+                    input.nextLine();
+                    continue;
+                }
+                
 
                 if(id >= 0 && id < accounts.size()){
 
@@ -52,14 +82,32 @@ public class Main {
                                 System.out.println(" 4. Exit");
 
                                 System.out.println(" Choose Option ");
-                                int choice2 = input.nextInt();
-                                input.nextLine(); // for clear buffer (AFTER EVERY NUMBER INPUT)
+                                //int choice2 = input.nextInt();
+                                //input.nextLine(); // for clear buffer (AFTER EVERY NUMBER INPUT)
+                                int choice2;
+                                try {
+                                    choice2 = input.nextInt();
+                                } catch (Exception e) {
+                                    System.out.println("Invalid input..");
+                                    input.nextLine();
+                                    continue;
+                                }
 
                                 switch (choice2) {
                                     case 1:
                                         //User to deposit money()
                                         System.out.println(" Enter ammount to Deposit : ");
-                                        double deposit = input.nextDouble();
+                                        //double deposit = input.nextDouble();
+                                        double deposit;
+
+                                        try {
+                                            deposit = input.nextDouble();
+                                        } catch (Exception e) {
+                                            System.out.println("Invalid input..");
+                                            input.nextLine();
+                                            continue;
+                                        }
+
                                         selected.deposit(deposit);   //method call with parameter 
                                         System.out.println("Current Balance : " + selected.getBalance());  
                                         break;
@@ -67,7 +115,16 @@ public class Main {
                                     case 2:
                                         //User Withdrow
                                         System.out.println("Enter ammount to withdrow : ");
-                                        double withdraw = input.nextDouble();
+                                        //double withdraw = input.nextDouble();
+
+                                        double withdraw;
+                                        try {
+                                            withdraw = input.nextDouble();
+                                        } catch (Exception e) {
+                                            System.out.println("Invalid Input");
+                                            input.nextLine();
+                                            continue;
+                                        }
                                         selected.withdraw(withdraw);
                                         System.out.println("Current Balance : " + selected.getBalance());
                                         break;
@@ -86,12 +143,14 @@ public class Main {
                                         break;
                                 }
 
-                                System.out.println("Current Balance : " + selected.getBalance());
 
                             }
 
 
-                }else {
+                }
+                
+                
+                else {
                     System.out.println(" Invalid Id ");
                 }
                 
