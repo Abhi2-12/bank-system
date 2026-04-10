@@ -1,25 +1,31 @@
 public class BankAccount {
 
+    private int id;
     private double balance;  //account balance (Encapsulation data hiding)
 
     //Constructor to set initial balance
-    public BankAccount(double initialBalance){
-        balance = initialBalance;
+    public BankAccount(int id, double initialBalance){
+        this.id = id;
+        this.balance = initialBalance;
     }
 
-    //Deposit Method   and perameter passing
-    public void deposit(double ammount){
-        balance += ammount;
-        System.out.println("Deposit : " + ammount);
+    public int getId() {
+        return id;
+    }
+
+    //Deposit Method
+    public void deposit(double amount){
+        balance += amount;
+        System.out.println("Deposit : " + amount);
     }
     
-    //Withdrow method
-    public void withdraw(double ammount){
-        if(balance < ammount){       
-            System.out.println(" Not Enought Balance");    //balance less than ammount 
+    //Withdraw method
+    public void withdraw(double amount){
+        if(balance < amount){       
+            System.out.println(" Not Enough Balance");    //balance less than amount 
         } else {
-            balance -= ammount;
-            System.out.println(" Withdrow : " +ammount);
+            balance -= amount;
+            System.out.println(" Withdraw : " + amount);
         }
     }
 
@@ -27,5 +33,4 @@ public class BankAccount {
         return balance;
     }
 
-    
 }
